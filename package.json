@@ -4,7 +4,8 @@
   "description": "Website code and config for pencilcode.net.",
   "scripts": {
     "test": "grunt",
-    "build": "grunt build"
+    "build": "grunt build",
+    "start": "grunt devserver"
   },
   "repository": {
     "type": "git",

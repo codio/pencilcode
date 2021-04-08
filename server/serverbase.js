@@ -8,6 +8,8 @@ var express = require('express'),
     config = require('./config'),
     utils = require('./utils.js');
 
+var OWNER = 'codio';
+
 exports.initialize = function(app) {
   // Remove the express header.
   app.disable('x-powered-by');
@@ -21,28 +23,13 @@ exports.initialize = function(app) {
   // Set up preprocessor to break url into site and user and filepath.
   if (config.host) {
     app.use(function(req, res, next) {
-      var index = !req.hostname ? -1 :
-          req.hostname.lastIndexOf(app.locals.config.host);
-      if (index == -1) {
-        if (req.path.length > 1 &&
-            !/\.(?:pac|appcache|js|png)$/.test(req.path)) {
-          utils.errorExit('Host ' + req.hostname + ' not part of domain ' +
-              app.locals.config.host +
-              ' ip:' + req.connection.remoteAddress +
-              ' ua:' + req.get('User-Agent') +
-              ' url:' + req.url);
-        }
-      } else {
-        // Remove the '.' separator.
-        if (index > 0) { index -= 1; }
-        res.locals.site = app.locals.config.host;
-        res.locals.owner = req.hostname.substring(0, index);
-        res.locals.portpart = '';
-        if (req.headers.host && /:/.test(req.headers.host)) {
-          res.locals.portpart = /(:.*)$/.exec(req.headers.host)[1];
-        }
-        res.locals.filepath = req.path.replace(/^\/[^\/]*/, '');
+      res.locals.site = app.locals.config.host;
+      res.locals.owner = OWNER;
+      res.locals.portpart = '';
+      if (req.headers.host && /:/.test(req.headers.host)) {
+        res.locals.portpart = /(:.*)$/.exec(req.headers.host)[1];
       }
+      res.locals.filepath = req.path.replace(/^\/[^\/]*/, '');
       next();
     });
   } else {
