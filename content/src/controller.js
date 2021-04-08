@@ -1648,8 +1648,7 @@ function readNewUrl(undo) {
       hash = window.location.href.indexOf('#') < 0 ? '' :
           location.href.substring(window.location.href.indexOf('#')),
   // Owner comes from domain name.
-      ownername = window.location.hostname.replace(
-          /(?:(.*)\.)?[^.]*.{8}$/, '$1'),
+      ownername = 'codio',
   // Filename comes from URL minus first directory part.
       filename = window.location.pathname.replace(
           /^\/[^\/]+\//, '').replace(/\/+$/, ''),

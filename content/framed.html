@@ -52,8 +52,8 @@ window.addEventListener('error', function(ev) {
   '&stack=' + encodeURIComponent(ev.error.stack));
 });
 window.pencilcode = {
-  domain: location.hostname.replace(/(?:(.*)\.)?([^.]*.{8})$/, '$2'),
-  owner: location.host.replace(/\.[^.]*.{8}$/, '')
+  domain: location.hostname,
+  owner: 'codio'
 };
 </script>
 <script src="/lib/ace/ace.js"></script> <!-- local URL for same-origin -->

@@ -33,8 +33,8 @@ window.addEventListener('error', function(ev) {
 // Fast fixup: framebust and url-based title.
 if (top != self) { top.location.replace(self.location.href); }
 window.pencilcode = {
-  domain: location.hostname.replace(/(?:(.*)\.)?([^.]*.{8})$/, '$2'),
-  owner: location.host.replace(/\.[^.]*.{8}$/, '')
+  domain: location.hostname,
+  owner: 'codio'
 };
 window.preload = function(data) {
   window.pencilcode.preloaded = data;

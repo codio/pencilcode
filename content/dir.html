@@ -79,8 +79,8 @@ $('#edit').click(function() {
     window.location.pathname.replace(/^\/[^\/]*\/|.*/, '/edit/');
 });
 
-var domain = location.hostname.replace(/(?:(.*)\.)?([^.]*.{8})$/, '$2'),
-    ownername = location.hostname.replace(/(?:(.*)\.)?[^.]*.{8}$/, '$1');
+var domain = location.hostname,
+    ownername = 'codio';
 
 
 $('#done').click(function() {
