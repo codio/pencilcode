@@ -23,7 +23,7 @@ exports.initialize = function(app) {
   // Set up preprocessor to break url into site and user and filepath.
   if (config.host) {
     app.use(function(req, res, next) {
-      res.locals.site = app.locals.config.host;
+      res.locals.site = req.headers.host;
       res.locals.owner = OWNER;
       res.locals.portpart = '';
       if (req.headers.host && /:/.test(req.headers.host)) {
