@@ -240,3 +240,9 @@ Codio
 =====
 
 Hardcoded user, use current host to show locally.
+
+Build
+```npm run build```
+
+Start using on port 8008
+```npm run start```
