@@ -30,8 +30,8 @@ window.addEventListener('error', function(ev) {
   (!ev.error || !ev.error.stack ? '' :
   '&stack=' + encodeURIComponent(ev.error.stack));
 });
-// Fast fixup: framebust and url-based title.
-if (top != self) { top.location.replace(self.location.href); }
+// // Fast fixup: framebust and url-based title.
+// if (top != self) { top.location.replace(self.location.href); }
 window.pencilcode = {
   domain: location.hostname,
   owner: 'codio'
