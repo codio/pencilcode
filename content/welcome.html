@@ -231,15 +231,16 @@ $(function() {
     }
   });
   function tryLogin() {
+    // no LOGIN only local user 'codio'
     var user = $('#user').val().toLowerCase().trim();
     if (!user) return;
     $('#msg').text('Logging in...');
     var key = keyFromPassword(user, $('#pass').val());
-    $.getJSON('//' + user + '.' + location.hostname +
+    $.getJSON('//' + user + '.' + location.host +
         '/save/?mode=setkey&key=' + key + '&data=' + key).done(function(resp) {
       if (resp.keyset || resp.keycleared) {
         window.location =
-           '//' + user + '.' + location.hostname +
+           '//' + user + '.' + location.host +
                 '/edit/#login=' + user + ':' + (key ? key : '');
       } else {
         $('#pass').select().focus();
@@ -373,7 +374,7 @@ function preload(urls) {
   }
 }
 
-window.pencilcode = {domain: location.hostname};
+window.pencilcode = {domain: location.host};
 
 setTimeout(function() {
   preload(['/editor.js', '/editor.css', '/image/folder_32.png', '/lib/droplet.css',

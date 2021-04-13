@@ -33,7 +33,7 @@ window.addEventListener('error', function(ev) {
 // // Fast fixup: framebust and url-based title.
 // if (top != self) { top.location.replace(self.location.href); }
 window.pencilcode = {
-  domain: location.hostname,
+  domain: location.host,
   owner: 'codio'
 };
 window.preload = function(data) {

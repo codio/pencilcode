@@ -79,7 +79,7 @@ $('#edit').click(function() {
     window.location.pathname.replace(/^\/[^\/]*\/|.*/, '/edit/');
 });
 
-var domain = location.hostname,
+var domain = location.host,
     ownername = 'codio';
 
 
@@ -174,7 +174,8 @@ function setPaneLinkText(list) {
 }
 
 var links = [];
-var backend = (ownername ? ownername + '.' : '') + domain;
+//var backend = (ownername ? ownername + '.' : '') + domain;
+var backend = domain;
 
 $.getJSON('//' + backend +
     '/load/' + window.location.pathname.replace(/^\/[^\/]+\//, ''),
@@ -190,7 +191,8 @@ function(m) {
     for (var j = 0; j < m.list.length; ++j) {
       if (m.list[j].mode.indexOf('d') < 0) { continue; }
       var label = m.list[j].name;
-      var href = '//' + label + '.' + domain + '/home/';
+      //var href = '//' + label + '.' + domain + '/home/';
+      var href = '//' + domain + '/home/';
       links.push({html:label, href:href});
     }
   } else {
