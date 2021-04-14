@@ -5,7 +5,8 @@
   "scripts": {
     "test": "grunt",
     "build": "grunt build",
-    "start": "grunt devserver"
+    "start": "grunt devserver",
+    "serve": "grunt serve"
   },
   "repository": {
     "type": "git",

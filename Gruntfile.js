@@ -181,6 +181,13 @@ module.exports = function(grunt) {
         port: grunt.option('port'),
         output: 'listening'
       },
+      serve: {
+        options: {
+          script: 'server/devserver.js',
+          node_env: 'development',
+          background: false
+        }
+      },
       dev: {
         options: {
           script: 'server/devserver.js',
@@ -346,6 +353,9 @@ module.exports = function(grunt) {
   // "build", for development, builds code without running tests.
   grunt.registerTask('build',
       ['browserify:dist', 'uglify', 'less', 'builddate']);
+  // "serve" dev
+  grunt.registerTask('serve',
+      ['proxymessage', 'browserify:server', 'express:serve']);
   // default target: compile editor code and uglify turtlebits.js, and test it.
   grunt.registerTask('default',
       ['build', 'test']);
