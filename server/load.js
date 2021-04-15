@@ -43,16 +43,16 @@ exports.handleLoad = function(req, res, app, format) {
     var isRootListing = !user && filename === '' && format === 'json';
     var isShareSite = SHARE_SITE[user] && filename === '' && format === 'json';
 
-    // Validate username
-    if (user) {
-      utils.validateUserName(user);
-      if (filename.length > 0) {
-        filename = path.join(user, filename);
-      }
-      else {
-        filename = user + '/';
-      }
-    }
+    // // Validate username
+    // if (user) {
+    //   utils.validateUserName(user);
+    //   if (filename.length > 0) {
+    //     filename = path.join(user, filename);
+    //   }
+    //   else {
+    //     filename = user + '/';
+    //   }
+    // }
 
     // Validate filename
     if (filename.length > 0) {

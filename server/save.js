@@ -70,15 +70,15 @@ exports.handleSave = function(req, res, app) {
     }
 
     // validate username
-    var userdir = null;
-    if (user) {
-      utils.validateUserName(user);
-      filename = path.join(user, filename);
-      userdir = utils.getUserHomeDir(user, app);
-    }
+    // var userdir = null;
+    // if (user) {
+    //   utils.validateUserName(user);
+    //   filename = path.join(user, filename);
+    //   userdir = utils.getUserHomeDir(user, app);
+    // }
 
     var topdir = false;
-    if (!utils.isFileNameValid(filename, true)) {
+    if (!utils.isFileNameValid(filename, false)) {
       if (mode == 'setkey' ||
           (!data && (mode == 'rmtree' || mode == 'mv' || !sourcefile)) &&
           /^[\w][\w\\-]*\/?$/.test(filename)) {
@@ -234,7 +234,7 @@ exports.handleSave = function(req, res, app) {
         }
       }
 
-      touchUserDir(userdir);
+      // touchUserDir(userdir);
       res.json({saved: '/' + filename});
       return;
     }
@@ -271,9 +271,9 @@ exports.handleSave = function(req, res, app) {
         tryToRemoveSync(absfile);
       }
 
-      if (userdir != absfile) {
-        touchUserDir(userdir);
-      }
+      // if (userdir != absfile) {
+      //   touchUserDir(userdir);
+      // }
 
       res.json({'deleted' : filename});
       return;
@@ -308,7 +308,7 @@ exports.handleSave = function(req, res, app) {
     }
 
     var statObj = fs.statSync(absfile);
-    touchUserDir(userdir);
+    // touchUserDir(userdir);
     res.json({
       saved: '/' + filename,
       mtime: statObj.mtime.getTime(),

@@ -103,7 +103,7 @@ exports.isFileNameValid = function(filename, needone) {
 exports.makeAbsolute = makeAbsolute;
 
 function makeAbsolute(filename, app) {
-  var absfile = path.join(app.locals.config.dirs.datadir, filename);
+  var absfile = path.join(app.locals.config.dirs.datadir, filename + '.pencilcode');
   if (absfile.indexOf(app.locals.config.dirs.datadir) != 0) {
     errorExit('Illegal filename ' + filename);
   }
