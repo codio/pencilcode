@@ -1900,8 +1900,8 @@ function runCodeAtPosition(position, doc, filename, emptyOnly) {
   m.filename = filename;
   var baseUrl = filename && (
       window.location.protocol +
-      '//' + (model.ownername ? model.ownername + '.' : '') +
-      window.pencilcode.domain + '/home/' + filename);
+      '//' + window.pencilcode.domain + '/home/' + filename);
+      // '//' + (model.ownername ? model.ownername + '.' : '') +
   var pane = paneatpos(position);
   var setupScript = (model.setupScript || []).concat(
       [{ src: "//{site}/lib/start-ide.js" }]);
