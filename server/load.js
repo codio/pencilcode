@@ -20,6 +20,8 @@ var MAX_DIR_ENTRIES = 600;
 // Special share sites
 var SHARE_SITE = { share: true, gymstage: true };
 
+var EXTENSION = 'pencilcode';
+
 function getDirCache(dir) {
   var dircache = globalDirCache[dir]
   if (!dircache) {
@@ -123,7 +125,12 @@ exports.handleLoad = function(req, res, app, format) {
             } else {
               data = {
                 directory: dir,
-                list: dircache.readPrefix(prefix, count),
+                list: dircache.readPrefix(prefix, count, EXTENSION).map(
+                  function (obj) {
+                    obj.name = obj.name.replace(new RegExp('\.' + EXTENSION + '$'), '');
+                    return obj;
+                  }
+                ),
                 age: dircache.age(),
                 rebuildMs: dircache.rebuildMs,
                 auth: false
@@ -142,10 +149,13 @@ exports.handleLoad = function(req, res, app, format) {
 
         var dirloader = new DirLoader(absfile);
         dirloader.rebuild(function(ok) {
-          var list = dirloader.readPrefix(prefix, count);
+          var list = dirloader.readPrefix(prefix, count, EXTENSION);
           var jsonRet = {
             directory: '/' + filename,
-            list: list,
+            list: list.map(function (obj) {
+              obj.name = obj.name.replace(new RegExp('\.' + EXTENSION + '$'), '');
+              return obj;
+            }),
             auth: haskey
           };
 
