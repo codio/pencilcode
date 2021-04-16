@@ -154,7 +154,7 @@ window.pencilcode.storage = {
     var preloaded = null;
     if (window.pencilcode.preloaded) {
       var data = window.pencilcode.preloaded,
-          expect = (ownername ? '/' + ownername : '')  + '/' + filename;
+          expect = filename;
       window.pencilcode.preloaded = null;
       if (data.directory == expect || data.file == expect) {
         console.log('Preloaded data', expect);
@@ -178,7 +178,7 @@ window.pencilcode.storage = {
     if (preloaded) {
       setTimeout(function() { handleNetworkLoad(preloaded); }, 0);
     } else {
-      console.log('storage load', ownername, window.pencilcode.domain);
+      // console.log('storage load', ownername, window.pencilcode.domain);
       // $.getJSON((ownername ? '//' + ownername + '.' +
       //            window.pencilcode.domain : '') +
       //     '/load/' + filename, handleNetworkLoad).error(handleNetworkError);
@@ -289,8 +289,7 @@ window.pencilcode.storage = {
     var domain = window.pencilcode.domain;
     var crossdomain = (window.location.host != domain);
     $.ajax({
-      url: (ownername ? '//' + domain : '') +
-          '/save/' + filename,
+      url: '/save/' + filename,
       data: payload,
       dataType: 'json',
       // Use a GET if crossdomain and the payload is short.  Note that
@@ -336,11 +335,11 @@ window.pencilcode.storage = {
   },
   moveFile: function(ownername, sourcefile, filename, key, copy, callback) {
     var payload = {
-      source: ownername + '/' + sourcefile
+      source: sourcefile
     };
     if (!copy) { payload.mode = 'mv'; }
     if (key) { payload.key = key; }
-    $.post('//' + ownername + '.' + window.pencilcode.domain + '/save/' +
+    $.post('//' + window.pencilcode.domain + '/save/' +
         filename, payload, function(m) {
       var check;
       if (m.error) {

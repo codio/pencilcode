@@ -141,7 +141,7 @@ exports.handleSave = function(req, res, app) {
 
       sourceuser = filenameuser(sourcefile);
 
-      var absSourceFile = utils.makeAbsolute(sourcefile, app);
+      var absSourceFile = utils.makeAbsolute(sourcefile + '.pencilcode', app);
       var absSourceThumb = utils.getAbsThumbPath(sourcefile, app);
       var sourceThumbExists = fs.existsSync(absSourceThumb);
       if (!fs.existsSync(absSourceFile)) {

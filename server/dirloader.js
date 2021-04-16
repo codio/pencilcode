@@ -335,7 +335,7 @@ exports.DirLoader.prototype = {
   // matched name (if any) and the most recent prefix matches.
   // Items will be returned in modification order (most recent first),
   // except that any exact match will be listed first.
-  readPrefix: function(prefix, count, extension) {
+  readPrefix: function(prefix, count) {
     var result = [];
     // ex is 1 if we need to reserve space for an exact match.
     var ex = this.map.hasOwnProperty(prefix) ? 1 : 0;
@@ -348,8 +348,7 @@ exports.DirLoader.prototype = {
         ex = 0;
         result.unshift(obj);
       } else if (name.length > prefix.length &&
-          name.substr(0, prefix.length) == prefix &&
-          name.lastIndexOf('.' + extension) > -1) {
+        name.substr(0, prefix.length) == prefix) {
         // Include prefix matches by recency.
         result.push(obj);
       }

@@ -107,24 +107,13 @@ function makeAbsolute(filename, app) {
   if (absfile.indexOf(app.locals.config.dirs.datadir) != 0) {
     errorExit('Illegal filename ' + filename);
   }
-  if (!!filename) {
-    absfile = absfile + '.pencilcode';
-  }
-  return path.resolve(absfile);
-};
-
-function makeAbsoluteWithoutExtension(filename, app) {
-  var absfile = path.join(app.locals.config.dirs.datadir, filename);
-  if (absfile.indexOf(app.locals.config.dirs.datadir) != 0) {
-    errorExit('Illegal filename ' + filename);
-  }
   return path.resolve(absfile);
 };
 
 var THUMB_DIR = '.thumb/';
 
 exports.getAbsThumbPath = function(filename, app) {
-  return makeAbsoluteWithoutExtension(makeThumbPath(filename), app);
+  return makeAbsolute(makeThumbPath(filename), app);
 }
 
 exports.makeThumbPath = makeThumbPath;
