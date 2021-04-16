@@ -35,7 +35,9 @@ function rewriteRules(req, res, next) {
 }
 
 var expandSiteInclude = tamper(function(req, res) {
-  if (!/^(?:(?:https?:)?\/\/[^\/]+)?\/[^\/]*\.html$/i.test(req.url)) {
+  // do not check url parameters
+  var url = req.url.replace(/\?.*$/, '')
+  if (!/^(?:(?:https?:)?\/\/[^\/]+)?\/[^\/]*\.html$/i.test(url)) {
     return;
   }
   return function(body) {
