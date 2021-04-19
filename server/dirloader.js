@@ -54,7 +54,7 @@ function encodeStat(name, statObj, itempath) {
   }
   var mtime = statObj.mtime.getTime();
 
-  var absthumb = utils.makeThumbPath(itempath);
+  var absthumb = utils.makeThumbPath(itempath.replace(/.pencilcode$/, ''));
 
   return {
     name: name,

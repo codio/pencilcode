@@ -104,7 +104,14 @@ exports.handleLoad = function(req, res, app, format) {
         // Root listing and share site are cached.
         if (isRootListing || isShareSite) {
           // Grab the dir cache object for this root directory path.
-          var dircache = getDirCache(absfile);
+          var dircache = getDirCache(absfile)
+            .filter(function (obj) {
+              return /.pencilcode$/.test(obj.name);
+            })
+            .map(function (obj) {
+              obj.name = obj.name.replace(/\.pencilcode$/, '');
+              return obj;
+            });
           if (prefix) {
             // When a specific prefix is requested, probe for an exact match.
             // Note: do not require a rebuilt cache for this operation.
@@ -145,7 +152,15 @@ exports.handleLoad = function(req, res, app, format) {
 
         var dirloader = new DirLoader(absfile);
         dirloader.rebuild(function(ok) {
-          var list = dirloader.readPrefix(prefix, count);
+          var list = dirloader
+            .readPrefix(prefix, count)
+            .filter(function (obj) {
+              return /.pencilcode$/.test(obj.name);
+            })
+            .map(function (obj) {
+              obj.name = obj.name.replace(/\.pencilcode$/, '');
+              return obj;
+            });
           var jsonRet = {
             directory: '/' + filename,
             list: list,

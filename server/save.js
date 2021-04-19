@@ -103,7 +103,7 @@ exports.handleSave = function(req, res, app) {
     }
 
 
-    var absfile = utils.makeAbsolute(filename, app);
+    var absfile = utils.makeAbsolute(filename + '.pencilcode', app);
     var absthumb = utils.getAbsThumbPath(filename, app);
 
     //
