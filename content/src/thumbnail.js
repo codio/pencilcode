@@ -7,6 +7,10 @@ var NUM_ATTEMPTS = 3;
 // Public functions
 var thumbnail = {
   generateThumbnailDataUrl: function(iframe, callback) {
+    if (!iframe) {
+      callback('');
+      return;
+    }
     // Get the canvas inside the iframe.
     var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
     var innerBody = innerDoc.body;

@@ -54,7 +54,7 @@ function encodeStat(name, statObj, itempath) {
   }
   var mtime = statObj.mtime.getTime();
 
-  var absthumb = utils.makeThumbPath(itempath);
+  var absthumb = utils.makeThumbPath(itempath.replace(/.pencilcode$/, ''));
 
   return {
     name: name,
@@ -348,7 +348,7 @@ exports.DirLoader.prototype = {
         ex = 0;
         result.unshift(obj);
       } else if (name.length > prefix.length &&
-          name.substr(0, prefix.length) == prefix) {
+        name.substr(0, prefix.length) == prefix) {
         // Include prefix matches by recency.
         result.push(obj);
       }

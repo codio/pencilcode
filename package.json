@@ -4,7 +4,9 @@
   "description": "Website code and config for pencilcode.net.",
   "scripts": {
     "test": "grunt",
-    "build": "grunt build"
+    "build": "grunt build",
+    "start": "grunt devserver",
+    "serve": "grunt serve"
   },
   "repository": {
     "type": "git",
@@ -22,7 +24,7 @@
     "debug": "latest",
     "dynamic.io": "latest",
     "express": "^4.16.4",
-    "fs-ext": "^1.2.1",
+    "fs-ext": "^1.3.0",
     "fs-extra": "latest",
     "http-proxy": "latest",
     "log-timestamp": "latest",

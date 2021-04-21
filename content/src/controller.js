@@ -201,13 +201,13 @@ function updateTopControls(addHistory) {
       // is already logged in
       //
       if (model.username) {
-        buttons.push({
-          id: 'logout', label: 'Log out',
-          title: 'Log out from ' + model.username});
+        // buttons.push({
+        //   id: 'logout', label: 'Log out',
+        //   title: 'Log out from ' + model.username});
       } else {
-        buttons.push({
-          id: 'login', label: 'Log in',
-          title: 'Enter password for ' + model.ownername});
+        // buttons.push({
+        //   id: 'login', label: 'Log in',
+        //   title: 'Enter password for ' + model.ownername});
       }
     } else {
       // We're either in some file or directory
@@ -223,17 +223,7 @@ function updateTopControls(addHistory) {
           buttons.push({id: 'bydate', label: 'Sort by Date'});
         }
       } else if (!nosaveowner()) {
-        buttons.push({
-          id: 'login', label: 'Log in',
-          title: 'Log in and save'});
       }
-    }
-    buttons.push(
-        {id: 'help', label: '<span class=helplink>?</span>' });
-    if (m.data && m.data.file) {
-      buttons.push({
-        id: 'guide', label: '<span class=helplink>Guide</span>',
-        title: 'Open online guide'});
     }
 
     //
@@ -1648,8 +1638,7 @@ function readNewUrl(undo) {
       hash = window.location.href.indexOf('#') < 0 ? '' :
           location.href.substring(window.location.href.indexOf('#')),
   // Owner comes from domain name.
-      ownername = window.location.hostname.replace(
-          /(?:(.*)\.)?[^.]*.{8}$/, '$1'),
+      ownername = 'codio',
   // Filename comes from URL minus first directory part.
       filename = window.location.pathname.replace(
           /^\/[^\/]+\//, '').replace(/\/+$/, ''),
@@ -1901,8 +1890,8 @@ function runCodeAtPosition(position, doc, filename, emptyOnly) {
   m.filename = filename;
   var baseUrl = filename && (
       window.location.protocol +
-      '//' + (model.ownername ? model.ownername + '.' : '') +
-      window.pencilcode.domain + '/home/' + filename);
+      '//' + window.pencilcode.domain + '/home/' + filename);
+      // '//' + (model.ownername ? model.ownername + '.' : '') +
   var pane = paneatpos(position);
   var setupScript = (model.setupScript || []).concat(
       [{ src: "//{site}/lib/start-ide.js" }]);

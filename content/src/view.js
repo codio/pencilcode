@@ -82,7 +82,7 @@ var dropletMarkClassColors = {
 
 ZeroClipboard.config({
    swfPath: '/lib/zeroclipboard/ZeroClipboard.swf',
-   trustedDomains: [window.location.hostname, window.pencilcode.domain],
+   trustedDomains: [window.location.host, window.pencilcode.domain],
    allowScriptAccess: 'always'
 });
 
@@ -183,7 +183,7 @@ window.pencilcode.view = {
     state.nameText = s;
     $('#filename').text(s);
     var title = s.replace(/\/$/, '').replace(/^.*\//, '');
-    var domain = window.location.hostname.replace(/\..*$/, '');
+    var domain = window.location.host.replace(/\..*$/, '');
     if (!title) { title = domain; } else { title += ' (' + domain + ')'; }
     if (!title) title = 'Pencil Code Editor';
     document.title = title;
@@ -2347,7 +2347,7 @@ function setPaneEditorData(pane, doc, filename, useblocks) {
     dropletEditor.setFontSize(15);
   });
   dropletEditor.setPaletteWidth(250);
-  if (!/^frame\./.test(window.location.hostname)) {
+  if (!/^frame\./.test(window.location.host)) {
     // Blue nubby when inside pencilcode.
     dropletEditor.setTopNubbyStyle(0, '#1e90ff');
   } else {
@@ -2395,7 +2395,7 @@ function setPaneEditorData(pane, doc, filename, useblocks) {
     updatePaneTitle(pane);
   });
 
-  if (!/^frame\./.test(window.location.hostname)) {
+  if (!/^frame\./.test(window.location.host)) {
     $('<div class="blockmenu">Blocks' +
       '<span class="blockmenuarrow">&#9660;</span></div>').appendTo(
         dropletEditor.paletteWrapper);
@@ -2510,7 +2510,7 @@ function setupDropletSubEditor(box, pane, paneState, text, htmlorcss, tearDown, 
             modeOptions: dropletOptionsForMimeType('text/' + htmlorcss)
           });
   editor.setPaletteWidth(250);
-  if (!/^frame\./.test(window.location.hostname)) {
+  if (!/^frame\./.test(window.location.host)) {
     // Blue nubby when inside pencilcode.
     editor.setTopNubbyStyle(0, '#1e90ff');
   } else {

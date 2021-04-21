@@ -104,7 +104,7 @@ function isBackupPreferred(filename, m, preferUnsaved) {
 // When there is a problem posting cross-domain, display a link
 // to the domain so that users can bring up firewall UI for an expln.
 function networkErrorMessage(domain) {
-  if (domain != window.location.hostname) {
+  if (domain != window.location.host) {
     return 'Test your connection to <br><a href="//' + domain +
         '/" target="_blank">' + domain + '</a>.';
   } else {
@@ -154,7 +154,7 @@ window.pencilcode.storage = {
     var preloaded = null;
     if (window.pencilcode.preloaded) {
       var data = window.pencilcode.preloaded,
-          expect = (ownername ? '/' + ownername : '')  + '/' + filename;
+          expect = filename;
       window.pencilcode.preloaded = null;
       if (data.directory == expect || data.file == expect) {
         console.log('Preloaded data', expect);
@@ -178,9 +178,11 @@ window.pencilcode.storage = {
     if (preloaded) {
       setTimeout(function() { handleNetworkLoad(preloaded); }, 0);
     } else {
-      $.getJSON((ownername ? '//' + ownername + '.' +
-                 window.pencilcode.domain : '') +
-          '/load/' + filename, handleNetworkLoad).error(handleNetworkError);
+      // console.log('storage load', ownername, window.pencilcode.domain);
+      // $.getJSON((ownername ? '//' + ownername + '.' +
+      //            window.pencilcode.domain : '') +
+      //     '/load/' + filename, handleNetworkLoad).error(handleNetworkError);
+      $.getJSON('/load/' + filename, handleNetworkLoad).error(handleNetworkError);
     }
 
     function handleNetworkLoad(m) {
@@ -283,11 +285,11 @@ window.pencilcode.storage = {
     var payloadsize = payload.data.length + payload.meta.length;
 
     // Do the network save.
-    var domain = (ownername ? ownername + '.' : '') + window.pencilcode.domain;
-    var crossdomain = (window.location.hostname != domain);
+    //var domain = (ownername ? ownername + '.' : '') + window.pencilcode.domain;
+    var domain = window.pencilcode.domain;
+    var crossdomain = (window.location.host != domain);
     $.ajax({
-      url: (ownername ? '//' + domain : '') +
-          '/save/' + filename,
+      url: '/save/' + filename,
       data: payload,
       dataType: 'json',
       // Use a GET if crossdomain and the payload is short.  Note that
@@ -333,11 +335,11 @@ window.pencilcode.storage = {
   },
   moveFile: function(ownername, sourcefile, filename, key, copy, callback) {
     var payload = {
-      source: ownername + '/' + sourcefile
+      source: sourcefile
     };
     if (!copy) { payload.mode = 'mv'; }
     if (key) { payload.key = key; }
-    $.post('//' + ownername + '.' + window.pencilcode.domain + '/save/' +
+    $.post('//' + window.pencilcode.domain + '/save/' +
         filename, payload, function(m) {
       var check;
       if (m.error) {
@@ -356,14 +358,18 @@ window.pencilcode.storage = {
     });
   },
   setPassKey: function(ownername, key, oldkey, callback) {
-    $.post('//' + ownername + '.' + window.pencilcode.domain + '/save/',
+    // var url = '//' + ownername + '.' + window.pencilcode.domain + '/save/';
+    var url = '/save/';
+    $.post(url,
         $.extend({ mode: 'setkey', data: key}, oldkey ? { key: oldkey } : {}),
         function(m) {
       callback && callback(m);
     }, 'json').error(function() {
       console.log('got error here');
+      // var error_url = ownername + '.' + window.pencilcode.domain;
+      var error_url = window.pencilcode.domain;
       callback && callback({
-         error: networkErrorMessage(ownername + '.' + window.pencilcode.domain),
+         error: networkErrorMessage(error_url),
          offline:true
       });
     });

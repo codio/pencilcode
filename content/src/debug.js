@@ -122,7 +122,7 @@ var debug = window.ide = {
   getOptions: function() {
     // To reduce clutter, do not show 'Test panel' UI within the run
     // frame when the whole IDE is framed.
-    var embedded = /^frame\./.test(location.hostname);
+    var embedded = /^frame\./.test(location.host);
     return {
       panel: embedded ? 'auto' : true
     };

@@ -99,7 +99,7 @@
   // Look at the source of this script to determine the framing domain.
   var scripts = document.getElementsByTagName('script');
   var src = absoluteUrl(scripts.length && scripts[scripts.length - 1].src);
-  var domain = src ? src.hostname.replace(/(?:(.*)\.)?([^.]*.{8})$/, '$2') :
+  var domain = src ? src.hostname :
      'pencilcode.net';
 
   // The "frame" username is magic: it puts
