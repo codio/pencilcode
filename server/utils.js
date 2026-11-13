@@ -3,7 +3,7 @@ var fs = require('fs');
 
 exports.param = function(req, name, def) {
   var result = req.query[name];
-  if (result == null) result = req.body[name];
+  if (result == null && req.body) result = req.body[name];
   if (result == null) result = (def == null ? null : def);
   return result;
 }

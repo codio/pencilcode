@@ -16,7 +16,7 @@ On Windows Subsystem for Linux (WSL) *only*:
 <pre>
 git clone https://github.com/cacticouncil/pencilcode.git
 cd pencilcode
-npm install --no-shrinkwrap
+npm install
 grunt
 grunt devserver
 </pre>
