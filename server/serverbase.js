@@ -109,7 +109,7 @@ exports.initialize2 = function(app) {
     app.use(express.static(config.dirs.staticdir));
   }
 
-  app.get('*', function(req, res) {
+  app.get('/{*splat}', function(req, res) {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.end('404 - ' + req.url);
   });
