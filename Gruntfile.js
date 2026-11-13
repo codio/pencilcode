@@ -126,6 +126,10 @@ module.exports = function(grunt) {
           ]
         },
         options: {
+          toplevel: false,
+          parse: { module: false },
+          compress: { module: false },
+          output: { module: false },
           preserveComments: false,
           screwIE8: true,
           report: 'min',
